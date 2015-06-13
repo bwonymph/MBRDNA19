@@ -1,7 +1,12 @@
 #! /usr/bin/python
 
-import serial, sys
+import serial, sys, urllib, urllib3, json
+import requests
+from uber_connect import call_uber, uber_time_estimate
+from firebase import firebase
+from firebase_util import putIntoFirebaseCar
 
+requests.packages.urllib3.disable_warnings()
 initialTouched = False
 leftToRight = False
 topToBottom = False
@@ -11,9 +16,9 @@ device_name = '/dev/cu.usbserial-FTGQJ7IM'
 baud_rate = 115200
 
 # Set up the serial port connection
-ser = serial.Serial(device_name, baud_rate)
-ser.flushInput()
-ser.flushOutput()
+ser = ""  # serial.Serial(device_name, baud_rate)
+# ser.flushInput()
+# ser.flushOutput()
 
 
 class Shape:  # define parent class
@@ -101,7 +106,7 @@ def increasingX():
 
 
 def verifyLeftToRightSwipe():
-     while True:
+    while True:
         raw_data = ser.readline()
         parts = raw_data.split()
         command = parts[0]
@@ -111,7 +116,7 @@ def verifyLeftToRightSwipe():
                 return True
             else:
                 return False
-     return False
+    return False
 
 
 class PlusSymbol(Shape):
@@ -119,7 +124,7 @@ class PlusSymbol(Shape):
         global initialTouched
         numberOfTimesTried = 0
         while True:
-            if(numberOfTimesTried > maxTries):
+            if (numberOfTimesTried > maxTries):
                 print  "Ubering you"
             raw_data = ser.readline()
             parts = raw_data.split()
@@ -142,7 +147,21 @@ class PlusSymbol(Shape):
             sys.stdout.flush()
 
 
-while True:
-    raw_data = ser.readline()
-    symbol = PlusSymbol()
-    symbol.identifyShape()
+def getCurrentLocation():
+    url = "http://172.31.99.3/vehicle"
+    response = urllib.urlopen(url);
+    carData = json.loads(response.read())
+    GPS_Latitude = carData['GPS_Latitude']
+    GPS_Longitude = carData['GPS_Longitude']
+    putIntoFirebaseCar(GPS_Latitude, GPS_Longitude)
+    print GPS_Latitude, GPS_Longitude
+    print carData
+    uber_time_estimate(GPS_Latitude, GPS_Longitude)
+
+
+if __name__ == "__main__":
+    # DON'T DELETE ANYTHING BELOW
+    # raw_data = ser.readline()
+    #  symbol = PlusSymbol()
+    #  symbol.identifyShape()
+    getCurrentLocation()
