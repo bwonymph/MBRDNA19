@@ -1,0 +1,139 @@
+touchAt {'y': 78, 'x': 227, 'touches': 1}
+swipeDown {'touches': 1}
+touchAt {'y': 92, 'x': 230, 'touches': 1}
+touchAt {'y': 111, 'x': 236, 'touches': 1}
+touchAt {'y': 132, 'x': 244, 'touches': 1}
+touchAt {'y': 156, 'x': 253, 'touches': 1}
+touchAt {'y': 179, 'x': 262, 'touches': 1}
+touchAt {'y': 203, 'x': 270, 'touches': 1}
+touchAt {'y': 225, 'x': 278, 'touches': 1}
+touchAt {'y': 248, 'x': 285, 'touches': 1}
+touchAt {'y': 267, 'x': 290, 'touches': 1}
+swipeDown {'touches': 1}
+touchAt {'y': 286, 'x': 295, 'touches': 1}
+touchAt {'y': 301, 'x': 299, 'touches': 1}
+touchAt {'y': 314, 'x': 302, 'touches': 1}
+touchAt {'y': 324, 'x': 304, 'touches': 1}
+touchAt {'y': 334, 'x': 305, 'touches': 1}
+touchAt {'y': 341, 'x': 307, 'touches': 1}
+touchAt {'y': 347, 'x': 307, 'touches': 1}
+touchAt {'y': 352, 'x': 308, 'touches': 1}
+touchAt {'y': 356, 'x': 308, 'touches': 1}
+touchAt {'y': 360, 'x': 309, 'touches': 1}
+touchAt {'y': 364, 'x': 309, 'touches': 1}
+touchAt {'y': 369, 'x': 307, 'touches': 1}
+touchAt {'y': 375, 'x': 304, 'touches': 1}
+touchAt {'y': 380, 'x': 301, 'touches': 1}
+swipeDown {'touches': 1}
+touchAt {'y': 384, 'x': 299, 'touches': 1}
+touchpadAreaTouched {}
+touchAt {'y': 405, 'x': 288, 'touches': 1}
+touchAt {'y': 404, 'x': 288, 'touches': 1}
+touchAt {'y': 403, 'x': 289, 'touches': 1}
+touchAt {'y': 401, 'x': 290, 'touches': 1}
+touchAt {'y': 397, 'x': 291, 'touches': 1}
+touchAt {'y': 393, 'x': 292, 'touches': 1}
+swipeUp {'touches': 1}
+touchAt {'y': 389, 'x': 293, 'touches': 1}
+touchAt {'y': 382, 'x': 291, 'touches': 1}
+touchAt {'y': 374, 'x': 288, 'touches': 1}
+touchAt {'y': 364, 'x': 282, 'touches': 1}
+touchAt {'y': 353, 'x': 274, 'touches': 1}
+touchAt {'y': 342, 'x': 264, 'touches': 1}
+swipeLeft {'touches': 1}
+touchAt {'y': 333, 'x': 254, 'touches': 1}
+touchAt {'y': 323, 'x': 244, 'touches': 1}
+touchAt {'y': 313, 'x': 233, 'touches': 1}
+touchAt {'y': 304, 'x': 221, 'touches': 1}
+touchAt {'y': 294, 'x': 209, 'touches': 1}
+touchAt {'y': 285, 'x': 197, 'touches': 1}
+touchAt {'y': 276, 'x': 186, 'touches': 1}
+touchAt {'y': 267, 'x': 174, 'touches': 1}
+touchAt {'y': 258, 'x': 162, 'touches': 1}
+touchAt {'y': 251, 'x': 151, 'touches': 1}
+swipeLeft {'touches': 1}
+touchAt {'y': 244, 'x': 141, 'touches': 1}
+touchAt {'y': 238, 'x': 132, 'touches': 1}
+touchAt {'y': 233, 'x': 125, 'touches': 1}
+touchAt {'y': 229, 'x': 120, 'touches': 1}
+touchAt {'y': 226, 'x': 116, 'touches': 1}
+touchAt {'y': 223, 'x': 113, 'touches': 1}
+touchAt {'y': 221, 'x': 110, 'touches': 1}
+touchAt {'y': 218, 'x': 107, 'touches': 1}
+touchAt {'y': 216, 'x': 106, 'touches': 1}
+swipeUp {'touches': 1}
+touchAt {'y': 215, 'x': 104, 'touches': 1}
+touchAt {'y': 214, 'x': 103, 'touches': 1}
+touchAt {'y': 212, 'x': 102, 'touches': 1}
+touchAt {'y': 211, 'x': 101, 'touches': 1}
+touchAt {'y': 210, 'x': 100, 'touches': 1}
+touchAt {'y': 209, 'x': 99, 'touches': 1}
+touchAt {'y': 208, 'x': 99, 'touches': 1}
+touchAt {'y': 207, 'x': 98, 'touches': 1}
+touchAt {'y': 206, 'x': 98, 'touches': 1}
+touchAt {'y': 205, 'x': 97, 'touches': 1}
+touchHold {'touches': 1}
+touchAt {'y': 204, 'x': 97, 'touches': 1}
+swipeUp {'touches': 1}
+touchAt {'y': 204, 'x': 96, 'touches': 1}
+touchAt {'y': 203, 'x': 96, 'touches': 1}
+swipeRight {'touches': 1}
+touchAt {'y': 203, 'x': 97, 'touches': 1}
+touchAt {'y': 206, 'x': 101, 'touches': 1}
+touchAt {'y': 211, 'x': 112, 'touches': 1}
+touchAt {'y': 219, 'x': 129, 'touches': 1}
+touchAt {'y': 225, 'x': 148, 'touches': 1}
+touchAt {'y': 230, 'x': 168, 'touches': 1}
+touchAt {'y': 235, 'x': 190, 'touches': 1}
+touchAt {'y': 239, 'x': 208, 'touches': 1}
+touchAt {'y': 242, 'x': 225, 'touches': 1}
+touchAt {'y': 244, 'x': 241, 'touches': 1}
+touchAt {'y': 246, 'x': 254, 'touches': 1}
+touchAt {'y': 247, 'x': 265, 'touches': 1}
+touchAt {'y': 248, 'x': 274, 'touches': 1}
+touchAt {'y': 249, 'x': 280, 'touches': 1}
+touchAt {'y': 250, 'x': 285, 'touches': 1}
+touchAt {'y': 250, 'x': 289, 'touches': 1}
+touchAt {'y': 251, 'x': 292, 'touches': 1}
+touchAt {'y': 251, 'x': 295, 'touches': 1}
+touchAt {'y': 251, 'x': 297, 'touches': 1}
+touchAt {'y': 252, 'x': 300, 'touches': 1}
+touchAt {'y': 252, 'x': 301, 'touches': 1}
+touchAt {'y': 252, 'x': 303, 'touches': 1}
+touchAt {'y': 252, 'x': 304, 'touches': 1}
+touchAt {'y': 252, 'x': 305, 'touches': 1}
+touchAt {'y': 253, 'x': 306, 'touches': 1}
+touchAt {'y': 253, 'x': 307, 'touches': 1}
+touchAt {'y': 253, 'x': 308, 'touches': 1}
+touchAt {'y': 254, 'x': 308, 'touches': 1}
+touchAt {'y': 254, 'x': 309, 'touches': 1}
+touchAt {'y': 255, 'x': 310, 'touches': 1}
+touchAt {'y': 256, 'x': 311, 'touches': 1}
+touchAt {'y': 258, 'x': 311, 'touches': 1}
+touchAt {'y': 261, 'x': 311, 'touches': 1}
+touchAt {'y': 265, 'x': 311, 'touches': 1}
+touchAt {'y': 270, 'x': 310, 'touches': 1}
+touchAt {'y': 275, 'x': 308, 'touches': 1}
+touchAt {'y': 282, 'x': 304, 'touches': 1}
+touchAt {'y': 289, 'x': 299, 'touches': 1}
+touchAt {'y': 297, 'x': 292, 'touches': 1}
+touchAt {'y': 304, 'x': 282, 'touches': 1}
+touchAt {'y': 313, 'x': 269, 'touches': 1}
+touchAt {'y': 322, 'x': 256, 'touches': 1}
+touchAt {'y': 332, 'x': 240, 'touches': 1}
+touchAt {'y': 342, 'x': 222, 'touches': 1}
+touchAt {'y': 353, 'x': 204, 'touches': 1}
+touchAt {'y': 363, 'x': 186, 'touches': 1}
+swipeLeft {'touches': 1}
+touchAt {'y': 373, 'x': 168, 'touches': 1}
+touchAt {'y': 381, 'x': 154, 'touches': 1}
+touchAt {'y': 386, 'x': 144, 'touches': 1}
+touchAt {'y': 391, 'x': 137, 'touches': 1}
+touchAt {'y': 393, 'x': 133, 'touches': 1}
+touchAt {'y': 395, 'x': 131, 'touches': 1}
+touchAt {'y': 396, 'x': 129, 'touches': 1}
+touchAt {'y': 397, 'x': 128, 'touches': 1}
+touchAt {'y': 398, 'x': 127, 'touches': 1}
+touchAt {'y': 398, 'x': 126, 'touches': 1}
+swipeDown {'touches': 1}
+touchAt {'y': 399, 'x': 125, 'touches': 1}
