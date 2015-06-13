@@ -1,0 +1,12 @@
+{
+  "name": "Uber Benz API",
+  "keywords": ["uber", "python", "flask"],
+  "env": {
+    "UBER_CLIENT_ID": {
+      "description": "EXBIvkr2X4zbRlzeZKOMua8Z9-XhUjmM"
+    },
+    "UBER_CLIENT_SECRET": {
+      "description": "GESzipNI5RurLAKWrz2K3UPZXWACNzmyriFFceLS"
+    }
+  }
+}
