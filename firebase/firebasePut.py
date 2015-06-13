@@ -16,7 +16,7 @@ def postData():
     localGPSlat = data['GPS_Latitude']
     localGPSlong = data['GPS_Longitude']
 
-    firebase.put('/GPS_Latitude', "Lat", localGPSlat) # Add data to Node Node1
-    firebase.put('/GPS_Longitude', "Long", localGPSlong) # Add data to Node Node1
+    firebase.put('/Car', "GPS_Latitude", localGPSlat) # Add data to Node Node1
+    firebase.put('/Car', "GPS_Longitude", localGPSlong) # Add data to Node Node1
 
 postData();
