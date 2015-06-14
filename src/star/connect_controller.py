@@ -1,5 +1,5 @@
 #! /usr/bin/python
-
+# The entry point of our module
 import serial, sys, urllib, urllib3, json, time
 import requests
 from uber_connect import call_uber, uber_time_estimate, uber_price_estimate
@@ -8,27 +8,24 @@ from Firebase_util import putIntoFirebaseUber
 import Firebase_util as fire
 import connect_here as here
 import connect_twilio as twilio
-import threading
+from threading import Thread
 
 requests.packages.urllib3.disable_warnings()
 initialTouched = False
 leftToRight = False
 topToBottom = False
-maxTries = 20
-# Each test bench is labeled with the serial device name on the USB cable
+requested = True
+maxTries = 50
+
 device_name = '/dev/cu.usbserial-FTGQJ7IM'
 baud_rate = 115200
 
 # Set up the serial port connection
-ser = ""  # serial.Serial(device_name, baud_rate)
-# ser.flushInput()
-# ser.flushOutput()
-
+ser = serial.Serial(device_name, baud_rate)
 
 class Shape:  # define parent class
     def identifyShape(self):
         print 'This is super class, never called'
-
 
 def verifyInitalTouch(c):
     global initialTouched
@@ -39,7 +36,6 @@ def verifyInitalTouch(c):
         return True
     else:
         return False
-
 
 def increasingY():
     newY = 0
@@ -67,7 +63,6 @@ def increasingY():
                     continue
         return False
 
-
 def verifyTopToBottomSwipe():
     while True:
         raw_data = ser.readline()
@@ -80,7 +75,6 @@ def verifyTopToBottomSwipe():
             else:
                 return False
     return False
-
 
 def increasingX():
     newX = 0
@@ -108,13 +102,11 @@ def increasingX():
                     continue
         return False
 
-
 def verifyLeftToRightSwipe():
     while True:
         raw_data = ser.readline()
         parts = raw_data.split()
         command = parts[0]
-        #  print "TB--", command, params
         if command == 'swipeRight':
             if increasingX():
                 return True
@@ -122,14 +114,20 @@ def verifyLeftToRightSwipe():
                 return False
     return False
 
-
 class PlusSymbol(Shape):
+    def dumm(yself):
+        print "dummy"
     def identifyShape(self):
         global initialTouched
+        global requested
         numberOfTimesTried = 0
+        print "Starting Touch Auth"
         while True:
-            if (numberOfTimesTried > maxTries):
-                print  "Ubering you"
+            if (numberOfTimesTried > maxTries and requested):
+                print "Ubering you"
+                getCurrentLocation()
+                requested = False
+                fire.putIntoFirebaseUberState("yes")
             raw_data = ser.readline()
             parts = raw_data.split()
             command = parts[0]
@@ -141,34 +139,34 @@ class PlusSymbol(Shape):
                     print "Initial auth done."
                     if verifyLeftToRightSwipe():
                         print "You're successful in authenticating your soberness, drive!!"
+                        fire.putIntoFirebaseUberState("no")
                     return True
 
             else:
                 print "Please swipe correctly"
                 numberOfTimesTried += 1
                 initialTouched = False
-            # Force the system to flush the data buffer and write the output immediately
+
             sys.stdout.flush()
 
-
 def getCurrentLocation():
-    url = "http://172.31.99.4/vehicle"
-    #response = urllib.urlopen(url);
-    #carData = json.loads(response.read())
-    #GPS_Latitude = carData['GPS_Latitude']
-    #GPS_Longitude = carData['GPS_Longitude']
-    GPS_Latitude = 37.3857165278
-    GPS_Longitude = -122.261341278
+    url = "http://172.31.99.3/vehicle"
+    response = urllib.urlopen(url)
+    carData = json.loads(response.read())
+    GPS_Latitude = carData['GPS_Latitude']
+    GPS_Longitude = carData['GPS_Longitude']
+
     putIntoFirebaseUber(GPS_Latitude, GPS_Longitude)
 
-   # uber_time_estimate(GPS_Latitude, GPS_Longitude)
-   # uber_price_estimate(GPS_Latitude, GPS_Longitude)
-    #twilio.send_msg()
+    uber_time_estimate(GPS_Latitude, GPS_Longitude)
 
+    uber_price_estimate(GPS_Latitude, GPS_Longitude)
+
+   # twilio.send_msg()
 
 def pushToFireBaseBulk():
- #   print "Firebase bulk started"
-    url = "http://172.31.99.2/vehicle"
+    print "Fire Base started"
+    url = "http://172.31.99.3/vehicle"
     response = urllib.urlopen(url);
     carData = json.loads(response.read())
     fire.putIntoFirebaseCarBattery_Level(carData['Battery_Level'])
@@ -197,16 +195,16 @@ def pushToFireBaseBulk():
     fire.putIntoFirebaseCarTurn_Indicator_State(carData['Turn_Indicator_State'])
 
     here.get_speedLimit(carData['GPS_Latitude'], carData['GPS_Longitude'])
-#    print "Firebase bulk ended"
 
+def threadBack():
+        while True:
+            pushToFireBaseBulk()
 
 if __name__ == "__main__":
-    # DON'T DELETE ANYTHING BELOW
-    # raw_data = ser.readline()
-    #  symbol = PlusSymbol()
-    #  symbol.identifyShape()
-    auto.automatic_trips()
-    getCurrentLocation()
+    raw_data = ser.readline()
+    symbol = PlusSymbol()
+    symbol.identifyShape()
+    firebase_thread = Thread(target=threadBack(), args=())
+    firebase_thread = True
+    firebase_thread.start()
 
-    while True:
-        pushToFireBaseBulk()

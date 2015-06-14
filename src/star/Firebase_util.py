@@ -1,3 +1,4 @@
+# Util class for Firebase
 import requests
 import json
 import urllib3
@@ -8,11 +9,12 @@ requests.packages.urllib3.disable_warnings()
 
 firebase = firebase.FirebaseApplication('https://benkpak.firebaseio.com/', None)
 
-
 # methods for uber detection
 def putIntoFirebaseUber(GPS_Latitude, GPS_Longitude):
-    firebase.put('/Uber', "GPS_Latitude", GPS_Latitude)  # Add data to Node Node1
-    firebase.put('/Uber', "GPS_Longitude", GPS_Longitude)  # Add data to Node Node1
+    firebase.put('/Uber', "GPS_Start_Latitude", GPS_Latitude)  # Add data to Node Node1
+    firebase.put('/Uber', "GPS_Start_Longitude", GPS_Longitude)  # Add data to Node Node1
+    firebase.put('/Uber', "GPS_End_Latitude", GPS_Latitude - 1)  # Add data to Node Node1
+    firebase.put('/Uber', "GPS_End_Longitude", GPS_Longitude + 1)  # Add data to Node Node1
 
 
 # put into car methods
@@ -116,3 +118,14 @@ def putIntoFirebaseUberPrice(data):
         print i['distance']
         firebase.put('/Uber/Prices/Low', i['localized_display_name'], i['low_estimate'])
         firebase.put('/Uber/Prices/High', i['localized_display_name'], i['high_estimate'])
+
+
+def putIntoFirebaseTwilio(name, toNumber, currTime):
+    firebase.put('/Twilio', 'callPlaced', 'yes')
+    firebase.put('/Twilio', 'name', name)
+    firebase.put('/Twilio', 'number', toNumber)
+    firebase.put('/Twilio', 'time', currTime)
+
+
+def putIntoFirebaseUberState(state):
+    firebase.put('/Uber', "drunk", state)
