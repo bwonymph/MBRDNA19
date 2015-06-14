@@ -6,6 +6,7 @@ import requests
 import urllib3
 from urlparse import urlparse
 import Firebase_util as fire
+from firebase import firebase
 from rauth import OAuth2Service
 
 requests.packages.urllib3.disable_warnings()
@@ -34,10 +35,10 @@ parameters = {
 # Redirect user here to authorize your application
 login_url = uber_api.get_authorize_url(**parameters)
 
-
 def uber_time_estimate(latitude, longitude):
     print "time estimate uber"
     url = 'https://api.uber.com/v1/estimates/time'
+    print latitude, longitude
     parameters1 = {
         'server_token': UBER_SERVER_TOKEN,
         'start_latitude': latitude,

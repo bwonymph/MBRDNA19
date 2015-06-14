@@ -1,4 +1,6 @@
 from twilio.rest import TwilioRestClient
+import Firebase_util as fire
+import time
 
 # put your own credentials here 
 ACCOUNT_SID = "AC9920d26a6e014273f8704eb3ee500de2"
@@ -22,5 +24,6 @@ def send_msg():
                                    record="false")
 
         print "Emergency call/msgs done from Twilio. call id:" + call.sid
+        fire.putIntoFirebaseTwilio('Varun Ved', TO_NUMBER, time.time())
     except twilio.TwilioRestException as e:
         print e
