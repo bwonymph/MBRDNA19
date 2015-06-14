@@ -1,11 +1,13 @@
 #! /usr/bin/python
 
-import serial, sys, urllib, urllib3, json
+import serial, sys, urllib, urllib3, json, time
 import requests
 from uber_connect import call_uber, uber_time_estimate
 from firebase import firebase
 from Firebase_util import putIntoFirebaseUber
-from connect_here import get_speedLimit
+import Firebase_util as fire
+import connect_here as here
+import threading
 
 requests.packages.urllib3.disable_warnings()
 initialTouched = False
@@ -149,16 +151,49 @@ class PlusSymbol(Shape):
 
 
 def getCurrentLocation():
-    url = "http://172.31.99.3/vehicle"
+    url = "http://172.31.99.4/vehicle"
     response = urllib.urlopen(url);
     carData = json.loads(response.read())
     GPS_Latitude = carData['GPS_Latitude']
     GPS_Longitude = carData['GPS_Longitude']
 
-    get_speedLimit(GPS_Latitude, GPS_Longitude)
     putIntoFirebaseUber(GPS_Latitude, GPS_Longitude)
 
     uber_time_estimate(GPS_Latitude, GPS_Longitude)
+
+
+def pushToFireBaseBulk():
+ #   print "Firebase bulk started"
+    url = "http://172.31.99.4/vehicle"
+    response = urllib.urlopen(url);
+    carData = json.loads(response.read())
+    fire.putIntoFirebaseCarBattery_Level(carData['Battery_Level'])
+    fire.putIntoFirebaseCarHonk_State(carData['Honk_State'])
+    fire.putIntoFirebaseCarFuel_Consumption(carData['Fuel_Consumption'])
+    fire.putIntoFirebaseCarAccelerator_Pedal(carData['Accelerator_Pedal'])
+    fire.putIntoFirebaseCarInside_Temperature(carData['Inside_Temperature'])
+    fire.putIntoFirebaseCarFuel_Level(carData['Fuel_Level'])
+    fire.putIntoFirebaseCarOutside_Air_Temperature(carData['Outside_Air_Temperature'])
+    fire.putIntoFirebaseCarOdometer(carData['Odometer'])
+
+    fire.putIntoFirebaseCarDoor_State_Front_Left(carData['Door_State_Front_Left'])
+    fire.putIntoFirebaseCarDoor_State_Front_Right(carData['Door_State_Front_Right'])
+    fire.putIntoFirebaseCarDoor_State_Rear_Left(carData['Door_State_Rear_Left'])
+    fire.putIntoFirebaseCarDoor_State_Rear_Right(carData['Door_State_Rear_Right'])
+
+    fire.putIntoFirebaseCarTire_Pressure_Front_Left(carData['Tire_Pressure_Front_Left'])
+    fire.putIntoFirebaseCarTire_Pressure_Front_Right(carData['Tire_Pressure_Front_Right'])
+    fire.putIntoFirebaseCarTire_Pressure_Rear_Left(carData['Tire_Pressure_Rear_Left'])
+    fire.putIntoFirebaseCarTire_Pressure_Rear_Right(carData['Tire_Pressure_Rear_Right'])
+
+    fire.putIntoFirebaseCarTimestamp(carData['Timestamp'])
+    fire.putIntoFirebaseCarFuel_Level_Critical(carData['Fuel_Level_Critical'])
+    fire.putIntoFirebaseCarVehicle_Speed(carData['Vehicle_Speed'])
+    fire.putIntoFirebaseCarIgnition_State(carData['Turn_Indicator_State'])
+    fire.putIntoFirebaseCarTurn_Indicator_State(carData['Turn_Indicator_State'])
+
+    here.get_speedLimit(carData['GPS_Latitude'], carData['GPS_Longitude'])
+#    print "Firebase bulk ended"
 
 
 if __name__ == "__main__":
@@ -166,4 +201,8 @@ if __name__ == "__main__":
     # raw_data = ser.readline()
     #  symbol = PlusSymbol()
     #  symbol.identifyShape()
+
     getCurrentLocation()
+
+    while True:
+        pushToFireBaseBulk()
