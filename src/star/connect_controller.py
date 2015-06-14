@@ -162,7 +162,7 @@ def getCurrentLocation():
 
     uber_price_estimate(GPS_Latitude, GPS_Longitude)
 
-   # twilio.send_msg()
+    twilio.send_msg()
 
 def pushToFireBaseBulk():
     print "Fire Base started"
