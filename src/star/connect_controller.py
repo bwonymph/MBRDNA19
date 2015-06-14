@@ -5,6 +5,7 @@ import requests
 from uber_connect import call_uber, uber_time_estimate
 from firebase import firebase
 from firebase_util import putIntoFirebaseCar
+from connect_here import get_speedLimit
 
 requests.packages.urllib3.disable_warnings()
 initialTouched = False
@@ -153,9 +154,10 @@ def getCurrentLocation():
     carData = json.loads(response.read())
     GPS_Latitude = carData['GPS_Latitude']
     GPS_Longitude = carData['GPS_Longitude']
+
+    get_speedLimit(GPS_Latitude, GPS_Longitude)
     putIntoFirebaseCar(GPS_Latitude, GPS_Longitude)
-    print GPS_Latitude, GPS_Longitude
-    print carData
+
     uber_time_estimate(GPS_Latitude, GPS_Longitude)
 
 
