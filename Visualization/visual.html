@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<script src="jquery-1.11.3.min.js"></script>
+<script src="js/d3.min.js"></script>
+<script src="js/epoch.min.js"></script>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/epoch.min.css">
+</head>
+
+<body>
+     <script>
+         var ref = new Firebase("https://benkpak.firebaseio.com")
+
+        ref.on("value", function(snapshot) {
+            console.log(snapshot.val());
+        }, function (Timestamp) {
+            console.log("Timestamp:" + Timestamp.code);
+        }, function (Fuel_Consumption) {
+            console.log("Fuel_Consumption:" + Fuel_Consumption.code);
+        });
+         
+        ref.on("child_added", function(snapshot, prevChildKey) {
+            var newPost = snapshot.val();
+            console.log("Time: " + newPost.Timestamp);
+            console.log("FuelC: " + newPost.Fuel_Consumption);
+            console.log("Previous Post ID: " + prevChildKey);
+        });
+        
+        <div id="areaChart" style="width: 800px; height: 200px"></div>
+        
+        var areaChartData =[
+                {
+                    label: "Fuel efficiency",
+                    values: [{time: 20, y:100}, {time:30, y:127}]
+                },
+        ];
+    </script>
+
+    <script>
+        $('#areaChart').epoch({
+            type: 'area',
+            data: areaChartData
+        });
+    </script>
+
+</body>
