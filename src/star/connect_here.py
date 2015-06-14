@@ -6,7 +6,7 @@ from uber_connect import call_uber, uber_time_estimate
 from firebase import firebase
 from Firebase_util import putIntoFirebaseSpeedLimit
 from pprint import pprint
-\
+
 HERE_APP_ID = 'CVT1d4hPZwdBitMF4uhM'
 HERE_APP_CODE = 'tqzZ2QHmKKKFWFkb-5Fp-g'
 

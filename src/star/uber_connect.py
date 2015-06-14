@@ -1,10 +1,11 @@
-__author__ = 'aravind.selvan'
+#! /usr/bin/python
 
 import json
 import os
 import requests
 import urllib3
 from urlparse import urlparse
+import Firebase_util as fire
 from rauth import OAuth2Service
 
 requests.packages.urllib3.disable_warnings()
@@ -44,7 +45,23 @@ def uber_time_estimate(latitude, longitude):
     }
     response = requests.get(url, params=parameters1)
     data = response.json()
-    print data
+    fire.putIntoFirebaseUberTimes(data)
+
+def uber_price_estimate(latitude, longitude):
+    print "price estimate uber"
+    url = 'https://api.uber.com/v1/estimates/price'
+    parameters1 = {
+        'server_token': UBER_SERVER_TOKEN,
+        'start_latitude': latitude,
+        'start_longitude': longitude,
+        'end_latitude': 38.3857165278,
+        'end_longitude': -122.261341278
+    }
+    response = requests.get(url, params=parameters1)
+
+    data = response.json()
+
+    fire.putIntoFirebaseUberPrice(data)
 
 
 def call_uber(latitude, longitude):

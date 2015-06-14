@@ -63,8 +63,10 @@ def putIntoFirebaseCarTire_Pressure_Rear_Left(Tire_Pressure_Rear_Left):
 def putIntoFirebaseCarTire_Pressure_Front_Right(Tire_Pressure_Front_Right):
     firebase.put('/Car', "Tire_Pressure_Front_Right", Tire_Pressure_Front_Right)
 
+
 def putIntoFirebaseCarTire_Pressure_Rear_Right(Tire_Pressure_Rear_Right):
     firebase.put('/Car', "Tire_Pressure_Rear_Right", Tire_Pressure_Rear_Right)
+
 
 def putIntoFirebaseCarTimestamp(Timestamp):
     firebase.put('/Car', "Timestamp", Timestamp)
@@ -101,3 +103,16 @@ def putIntoFirebaseCarTurn_Indicator_State(Turn_Indicator_State):
 def putIntoFirebaseSpeedLimit(speedLimit_value, speedLimit_unit):
     firebase.put('/Car', "SpeedLimit_Value", speedLimit_value)
     firebase.put('/Car', "SpeedLimit_Unit", speedLimit_unit)
+
+
+def putIntoFirebaseUberTimes(data):
+    for i in data['times']:
+        firebase.put('/Uber/Times', i['localized_display_name'], i['estimate'])
+
+
+def putIntoFirebaseUberPrice(data):
+    for i in data['prices']:
+        print i['localized_display_name']
+        print i['distance']
+        firebase.put('/Uber/Prices/Low', i['localized_display_name'], i['low_estimate'])
+        firebase.put('/Uber/Prices/High', i['localized_display_name'], i['high_estimate'])

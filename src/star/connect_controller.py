@@ -2,11 +2,12 @@
 
 import serial, sys, urllib, urllib3, json, time
 import requests
-from uber_connect import call_uber, uber_time_estimate
+from uber_connect import call_uber, uber_time_estimate, uber_price_estimate
 from firebase import firebase
 from Firebase_util import putIntoFirebaseUber
 import Firebase_util as fire
 import connect_here as here
+import connect_twilio as twilio
 import threading
 
 requests.packages.urllib3.disable_warnings()
@@ -152,19 +153,22 @@ class PlusSymbol(Shape):
 
 def getCurrentLocation():
     url = "http://172.31.99.4/vehicle"
-    response = urllib.urlopen(url);
-    carData = json.loads(response.read())
-    GPS_Latitude = carData['GPS_Latitude']
-    GPS_Longitude = carData['GPS_Longitude']
-
+    #response = urllib.urlopen(url);
+    #carData = json.loads(response.read())
+    #GPS_Latitude = carData['GPS_Latitude']
+    #GPS_Longitude = carData['GPS_Longitude']
+    GPS_Latitude = 37.3857165278
+    GPS_Longitude = -122.261341278
     putIntoFirebaseUber(GPS_Latitude, GPS_Longitude)
 
-    uber_time_estimate(GPS_Latitude, GPS_Longitude)
+   # uber_time_estimate(GPS_Latitude, GPS_Longitude)
+   # uber_price_estimate(GPS_Latitude, GPS_Longitude)
+    #twilio.send_msg()
 
 
 def pushToFireBaseBulk():
  #   print "Firebase bulk started"
-    url = "http://172.31.99.4/vehicle"
+    url = "http://172.31.99.2/vehicle"
     response = urllib.urlopen(url);
     carData = json.loads(response.read())
     fire.putIntoFirebaseCarBattery_Level(carData['Battery_Level'])
@@ -201,7 +205,7 @@ if __name__ == "__main__":
     # raw_data = ser.readline()
     #  symbol = PlusSymbol()
     #  symbol.identifyShape()
-
+    auto.automatic_trips()
     getCurrentLocation()
 
     while True:
