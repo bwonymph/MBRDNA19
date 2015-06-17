@@ -2,4 +2,5 @@
 Talk Safety To Me
 
 All data provided can only be accessed by Mercedes-Benz and APIs we have integrated.
-lol.
+
+Our project uses open APIs and vehicle data.
